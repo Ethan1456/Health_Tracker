@@ -87,17 +87,17 @@ input:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
-/* ===== Tables ===== */
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse; /* makes single borders instead of double */
   margin-top: 1rem;
+  border: 2px solid #000; /* outer black border */
 }
 
 table th, table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #e2e8f0; /* gray-200 */
+  border: 1px solid #000; /* black cell borders */
 }
 
 table th {

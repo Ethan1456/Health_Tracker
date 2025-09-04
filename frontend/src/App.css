@@ -16,3 +16,12 @@
   gap:10px;
   padding-top:10px;
 }
+.tableContainer{
+  max-height: 300px; /* adjust as needed */
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc; /* optional, for visual separation */
+  border-radius: 8px;
+  margin:10px;
+
+}

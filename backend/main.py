@@ -77,6 +77,21 @@ def send_data(entry:Entry):
     return {"error": "Failed to connect to the database"}
 
 
+@app.delete("/deleteEntry/{entry_id}")
+def delete_entry(entry_id: int):
+    conn = get_connection()
+    if conn:
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute("DELETE FROM entries WHERE id = %s", (entry_id,))
+                conn.commit()
+                return {"message": f"Entry {entry_id} deleted successfully"}
+        except pymysql.MySQLError as e:
+            print(f"Error deleting entry: {e}")
+            raise HTTPException(status_code=500, detail="Failed to delete entry")
+        finally:
+            conn.close()
+    raise HTTPException(status_code=500, detail="Database connection failed")
 
 
 

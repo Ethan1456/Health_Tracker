@@ -1,22 +1,23 @@
 import {useState, useEffect} from "react"
 
-function HealthTable(){
-    const [entries, setEntries] = useState<Array<{type: string; name: string; calories: number; date: string}>>([]);
+type Entry = {
+    id: number;
+    type: string;
+    name: string;
+    calories: number;
+    date: string;
+};
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch("http://localhost:8000/healthData");
-            const data = await response.json();
-            setEntries(data.entries);
-        };
-        fetchData();
-    }, []);
+
+
+function HealthTable({ entries, onDelete }: { entries: Entry[]; onDelete: (id: number) => void }) {
+   
+  
 
     return(
-        <div>
-            <h2>Health Data Table</h2>
+        <div className="tableContainer">
             {/* create table */}
-            <table>
+            <table >
                 <thead>
                     <tr>
                         <th>Type</th>
@@ -33,6 +34,11 @@ function HealthTable(){
                             <td>{entry.name}</td>
                             <td>{entry.calories}</td>
                             <td>{new Date(entry.date).toLocaleString()}</td>
+                            <td>
+                                <button onClick={() => onDelete(entry.id)} style={{ backgroundColor: "red" }}>
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
