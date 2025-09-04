@@ -7,6 +7,9 @@
 .formButton{
   width:100%
 }
+.dashboard{
+  width:100%;
+}
 
 .formInput{
   display: flex;
@@ -17,11 +20,47 @@
   padding-top:10px;
 }
 .tableContainer{
-  max-height: 300px; /* adjust as needed */
+  max-height: 300px;
   overflow-y: auto;
   margin-bottom: 1.5rem;
-  border: 1px solid #ccc; /* optional, for visual separation */
+  border: 1px solid #ccc; 
   border-radius: 8px;
   margin:10px;
 
 }
+
+.graphs {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.graph {
+  flex: 1;
+  padding: 1rem;
+  background-color: #f4a261; 
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.graph-food {
+  background-color: #f4a261;
+}
+
+.graph-day {
+  background-color: #2a9d8f;
+}
+
+.graph-type {
+  background-color: #e76f51;
+}
+
+.graph h3 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+

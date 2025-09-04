@@ -1,5 +1,9 @@
-import HealthTable from "./heathTable"
+import HealthTable from "./HeathTable"
 import { useState, useEffect} from "react";
+import {
+   ResponsiveContainer,BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line, PieChart, Pie, Cell
+} from "recharts";
+
 
 function Dashboard(){
     // states for the form
@@ -12,7 +16,7 @@ function Dashboard(){
 
 
     const handleSubmit = async() => {
-            // Input validation
+            // input validation
         if (!type.trim() || !name.trim()) {
         setErrorMessage("Type and Name cannot be empty.");
         return;
@@ -81,9 +85,34 @@ function Dashboard(){
     };
 
 
+    // Graph data prep
+    const caloriesPerEntry = entries.map(e => ({ name: e.name, calories: e.calories }));
+
+    const caloriesPerDay: { day: string; calories: number }[] = [];
+    const dayMap: Record<string, number> = {};
+    entries.forEach(e => {
+        const day = e.date.split("T")[0];
+        dayMap[day] = (dayMap[day] || 0) + e.calories;
+    });
+    for (const day in dayMap) {
+        caloriesPerDay.push({ day, calories: dayMap[day] });
+    }
+    const lineData = caloriesPerDay;
+
+    const typeDistribution: Record<string, number> = {};
+    entries.forEach(e => {
+        typeDistribution[e.type] = (typeDistribution[e.type] || 0) + 1;
+    });
+    const pieData = Object.entries(typeDistribution).map(([name, value]) => ({ name, value }));
+
+    const COLORS = ["#f4a261", "#2a9d8f", "#e76f51", "#e9c46a", "#264653"];
+
+
+
+
 
     return(
-        <div>
+        <div className="dashboard">
             {/* create a form */}
             <div className="formTable">
                 <div className="formInput">
@@ -123,10 +152,55 @@ function Dashboard(){
 
             <HealthTable entries={entries} onDelete={handleDelete} />
 
-            {/* 3 graphs go here */}
+            <div className="graphs">
+            {/* Graph 1 */}
+            <div className="graph graph-food">
+                <h3>Calories per Food</h3>
+                <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={caloriesPerEntry} margin={{ top: 20, right: 20, left: 20, bottom: 50 }}>
+                    <XAxis dataKey="name" angle={-30} textAnchor="end" interval={0} />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="calories" fill="#264653" />
+                </BarChart>
+                </ResponsiveContainer>
+            </div>
+
+            {/* Graph 2 */}
+            <div className="graph graph-day">
+                <h3>Total Calories per Day</h3>
+                <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={lineData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
+                    <XAxis dataKey="day" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="calories" stroke="#e9c46a" strokeWidth={2} />
+                </LineChart>
+                </ResponsiveContainer>
+            </div>
+
+            {/* Graph 3 */}
+            <div className="graph graph-type">
+                <h3>Food Type Distribution</h3>
+                <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                    <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={80} label>
+                    {pieData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                    </Pie>
+                    <Tooltip formatter={(value: number, name: string) => [`${value} entries`, name]} />
+                </PieChart>
+                </ResponsiveContainer>
+            </div>
+            </div>
 
 
-        </div>
+
+
+
+
+    </div>
     )
 
 

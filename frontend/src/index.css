@@ -1,29 +1,25 @@
-/* ===== Global Reset ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ===== Fonts & Body ===== */
 body {
   font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
-  background-color: #f8fafc; /* light neutral */
-  color: #1e293b; /* dark slate */
+  background-color: #f8fafc;
+  color: #1e293b;
   line-height: 1.6;
 }
 
-/* ===== Containers ===== */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* ===== Headings ===== */
 h1, h2, h3 {
   font-weight: 600;
-  color: #0f172a; /* darker slate */
+  color: #0f172a;
   margin-bottom: 1rem;
 }
 
@@ -35,7 +31,6 @@ h2 {
   font-size: 1.5rem;
 }
 
-/* ===== Cards ===== */
 .card {
   background: #ffffff;
   border-radius: 1rem;
@@ -50,9 +45,8 @@ h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-/* ===== Buttons ===== */
 button {
-  background-color: #2563eb; /* blue-600 */
+  background-color: #2563eb;
   color: #fff;
   font-weight: 500;
   border: none;
@@ -63,49 +57,47 @@ button {
 }
 
 button:hover {
-  background-color: #1d4ed8; /* blue-700 */
+  background-color: #1d4ed8;
 }
 
 button:disabled {
-  background-color: #94a3b8; /* gray-400 */
+  background-color: #94a3b8;
   cursor: not-allowed;
 }
 
-/* ===== Forms ===== */
 input, select {
   width: 100%;
   padding: 0.6rem 0.8rem;
-  border: 1px solid #cbd5e1; /* gray-300 */
+  border: 1px solid #cbd5e1;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
   font-size: 1rem;
 }
 
 input:focus, select:focus {
-  border-color: #2563eb; /* blue-600 */
+  border-color: #2563eb;
   outline: none;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 table {
   width: 100%;
-  border-collapse: collapse; /* makes single borders instead of double */
+  border-collapse: collapse; 
   margin-top: 1rem;
-  border: 2px solid #000; /* outer black border */
+  border: 2px solid #000; 
 }
 
 table th, table td {
   padding: 0.75rem;
   text-align: left;
-  border: 1px solid #000; /* black cell borders */
+  border: 1px solid #000;
 }
 
 table th {
-  background-color: #f1f5f9; /* gray-100 */
+  background-color: #f1f5f9;
   font-weight: 600;
 }
 
-/* ===== Utility Classes ===== */
 .text-center {
   text-align: center;
 }
